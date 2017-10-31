@@ -1,8 +1,8 @@
-;(function(global) {
+; (function (global) {
 
 	var mobileDetect = /Android|iPhone|iPad|iPod|BlackBerry|WPDesktop|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-	var createElement = function(cls, parent) {
+	var createElement = function (cls, parent) {
 		var obj = document.createElement('div');
 		obj.className = cls;
 		if (parent) {
@@ -40,7 +40,7 @@
 
 	Popup.prototype = {
 
-		options: function(opts) {
+		options: function (opts) {
 
 			this.defaults = this.extend({
 				closeShow: true,
@@ -59,7 +59,7 @@
 
 		},
 
-		extend: function(defaults, source) {
+		extend: function (defaults, source) {
 
 			for (var key in source) {
 				if (source.hasOwnProperty(key)) {
@@ -70,18 +70,18 @@
 			return defaults;
 		},
 
-		addCloseButtons: function() {
+		addCloseButtons: function () {
 
 			var obj = this;
 			var buttons = (this.defaults.closeButtons).split(',');
 
-			buttons.forEach(function(item, index) {
+			buttons.forEach(function (item, index) {
 
 				var selectors = document.querySelectorAll(item.replace(/\s+/g, ''));
 
-				Array.prototype.forEach.call(selectors, function(element, i) {
+				Array.prototype.forEach.call(selectors, function (element, i) {
 
-					element.addEventListener(obj.eventsTrigger, function() {
+					element.addEventListener(obj.eventsTrigger, function () {
 
 						obj.close();
 
@@ -95,12 +95,12 @@
 
 		},
 
-		coordSet: function() {
+		coordSet: function () {
 
 			var obj = this;
 			var button = document.querySelector(this.defaults.coordElement);
 
-			if(button) {
+			if (button) {
 
 				this.coords = button.getBoundingClientRect();
 
@@ -114,7 +114,7 @@
 
 		},
 
-		coordReset: function() {
+		coordReset: function () {
 
 			var obj = this;
 
@@ -127,7 +127,7 @@
 				coordElement: ''
 			};
 
-			setTimeout(function() {
+			setTimeout(function () {
 				obj.tags.popup.style.background = '';
 			}, 500); // указан в файле стилей transition
 
@@ -137,20 +137,20 @@
 			return this;
 		},
 
-		setBodyStyle: function() {
+		setBodyStyle: function () {
 
 			var trigger = window.innerHeight < document.body.scrollHeight;
 
 			document.body.classList.add('popup__body_hidden');
 
-			if(trigger) {
+			if (trigger) {
 				document.body.style.paddingRight = this.scrollWidth + 'px';
 			}
 			return this;
 
 		},
 
-		clearBodyStyle: function() {
+		clearBodyStyle: function () {
 
 			document.body.classList.remove('popup__body_hidden');
 			document.body.style.paddingRight = '';
@@ -158,9 +158,9 @@
 
 		},
 
-		html: function(response, callback) {
+		html: function (response, callback) {
 
-			if(this.defaults.closeShow) {
+			if (this.defaults.closeShow) {
 				this.tags.popup__close.style.display = '';
 			}
 			else {
@@ -169,7 +169,7 @@
 
 			this.setBodyStyle();
 
-			if(this.defaults.coordElement) {
+			if (this.defaults.coordElement) {
 
 				this.coordSet();
 
@@ -177,8 +177,8 @@
 
 			this.tags.popup__change.innerHTML = response;
 
-			if(callback) {
-				callback();
+			if (callback) {
+				callback.call(this.tags.popup, this.eventsTrigger);
 			}
 
 			if (this.defaults.closeButtons) {
@@ -189,9 +189,9 @@
 
 		},
 
-		append: function(response, callback) {
+		append: function (response, callback) {
 
-			if(this.defaults.closeShow) {
+			if (this.defaults.closeShow) {
 				this.tags.popup__close.style.display = '';
 			}
 			else {
@@ -200,7 +200,7 @@
 
 			this.setBodyStyle();
 
-			if(this.defaults.coordElement) {
+			if (this.defaults.coordElement) {
 
 				this.coordSet();
 
@@ -208,8 +208,8 @@
 
 			this.tags.popup__change.innerHTML += response;
 
-			if(callback) {
-				callback();
+			if (callback) {
+				callback.call(this.tags.popup, this.eventsTrigger);
 			}
 
 			if (this.defaults.closeButtons) {
@@ -219,26 +219,26 @@
 			return this;
 		},
 
-		clear: function() {
+		clear: function () {
 
 			this.tags.popup__change.innerHTML = '';
 			return this;
 
 		},
 
-		show: function(callback) {
+		show: function (callback) {
 
 			this.tags.popup.classList.add('popup_active');
 
-			if(callback) {
-				callback();
+			if (callback) {
+				callback.call(this.tags.popup, this.eventsTrigger);
 			}
 
 			return this;
 
 		},
 
-		close: function(callback) {
+		close: function (callback) {
 
 			this.tags.popup.classList.remove('popup_active');
 			this.clear();
@@ -246,8 +246,8 @@
 
 			this.coordReset();
 
-			if(callback) {
-				callback();
+			if (callback) {
+				callback.call(this.tags.popup, this.eventsTrigger);
 			}
 
 			this.clearBodyStyle();
@@ -256,25 +256,25 @@
 
 		},
 
-		events: function() {
+		events: function () {
 
 			var obj = this;
 
-			this.tags.popup__close.addEventListener(this.eventsTrigger, function() {
+			this.tags.popup__close.addEventListener(this.eventsTrigger, function () {
 
 				obj.close();
 				return false;
 
 			}, false);
 
-			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function() {
+			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function () {
 
 				obj.close();
 				return false;
 
 			}, false);
 
-			document.addEventListener('keydown', function(e) {
+			document.addEventListener('keydown', function (e) {
 
 				if (e.which == 27) {
 					obj.close();
@@ -284,7 +284,7 @@
 
 		},
 
-		scrollWidthElement: function() {
+		scrollWidthElement: function () {
 
 			var div = document.createElement("div");
 			div.style.overflowY = "scroll";
