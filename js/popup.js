@@ -28,6 +28,7 @@
 		this.scrollWidth = this.scrollWidthElement();
 
 		this.defaults = {
+			closeOverlay: true,
 			closeShow: true,
 			background: '',
 			closeButtons: '',
@@ -43,6 +44,7 @@
 		options: function (opts) {
 
 			this.defaults = this.extend({
+				closeOverlay: true,
 				closeShow: true,
 				background: '',
 				closeButtons: '',
@@ -119,6 +121,7 @@
 			var obj = this;
 
 			this.defaults = {
+				closeOverlay: true,
 				closeShow: true,
 				background: '',
 				closeButtons: '',
@@ -178,7 +181,7 @@
 			this.tags.popup__change.innerHTML = response;
 
 			if (callback) {
-				callback.call(this.tags.popup, this.eventsTrigger);
+				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
 			}
 
 			if (this.defaults.closeButtons) {
@@ -209,7 +212,7 @@
 			this.tags.popup__change.innerHTML += response;
 
 			if (callback) {
-				callback.call(this.tags.popup, this.eventsTrigger);
+				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
 			}
 
 			if (this.defaults.closeButtons) {
@@ -231,7 +234,7 @@
 			this.tags.popup.classList.add('popup_active');
 
 			if (callback) {
-				callback.call(this.tags.popup, this.eventsTrigger);
+				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
 			}
 
 			return this;
@@ -247,7 +250,7 @@
 			this.coordReset();
 
 			if (callback) {
-				callback.call(this.tags.popup, this.eventsTrigger);
+				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
 			}
 
 			this.clearBodyStyle();
@@ -269,7 +272,10 @@
 
 			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function () {
 
-				obj.close();
+				if (obj.defaults.closeOverlay) {
+					obj.close();
+				}
+
 				return false;
 
 			}, false);
