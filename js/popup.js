@@ -83,7 +83,9 @@
 
 				Array.prototype.forEach.call(selectors, function (element, i) {
 
-					element.addEventListener(obj.eventsTrigger, function () {
+					element.addEventListener(obj.eventsTrigger, function (e) {
+
+						e.stopPropagation();
 
 						obj.close();
 
