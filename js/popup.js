@@ -245,17 +245,23 @@
 
 		close: function (callback) {
 
-			this.tags.popup.classList.remove('popup_active');
-			this.clear();
+			var obj = this;
+
+			setTimeout(function () {
+
+				obj.tags.popup.classList.remove('popup_active');
+				obj.clear();
 
 
-			this.coordReset();
+				obj.coordReset();
 
-			if (callback) {
-				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
-			}
+				if (callback) {
+					callback.call(obj.tags.popup, obj.defaults, obj.eventsTrigger);
+				}
 
-			this.clearBodyStyle();
+				obj.clearBodyStyle();
+
+			}, 50);
 
 			return this;
 
