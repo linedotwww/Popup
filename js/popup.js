@@ -271,14 +271,17 @@
 
 			var obj = this;
 
-			this.tags.popup__close.addEventListener(this.eventsTrigger, function () {
+			this.tags.popup__close.addEventListener(this.eventsTrigger, function (e) {
 
+				e.stopPropagation();
 				obj.close();
 				return false;
 
 			}, false);
 
-			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function () {
+			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function (e) {
+
+				e.stopPropagation();
 
 				if (obj.defaults.closeOverlay) {
 					obj.close();
