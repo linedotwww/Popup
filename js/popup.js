@@ -28,6 +28,7 @@
 		this.scrollWidth = this.scrollWidthElement();
 
 		this.defaults = {
+			addClassNamePopup: '',
 			closeOverlay: true,
 			closeShow: true,
 			background: '',
@@ -44,6 +45,7 @@
 		options: function (opts) {
 
 			this.defaults = this.extend({
+				addClassNamePopup: '',
 				closeOverlay: true,
 				closeShow: true,
 				background: '',
@@ -123,6 +125,7 @@
 			var obj = this;
 
 			this.defaults = {
+				addClassNamePopup: '',
 				closeOverlay: true,
 				closeShow: true,
 				background: '',
@@ -233,6 +236,7 @@
 
 		show: function (callback) {
 
+			this.tags.popup.classList.add(this.defaults.addClassNamePopup);
 			this.tags.popup.classList.add('popup_active');
 
 			if (callback) {
@@ -250,6 +254,7 @@
 			setTimeout(function () {
 
 				obj.tags.popup.classList.remove('popup_active');
+				obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
 				obj.clear();
 
 
