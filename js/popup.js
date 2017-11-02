@@ -236,7 +236,9 @@
 
 		show: function (callback) {
 
-			this.tags.popup.classList.add(this.defaults.addClassNamePopup);
+			if(this.defaults.addClassNamePopup) {
+				this.tags.popup.classList.add(this.defaults.addClassNamePopup);
+			}
 			this.tags.popup.classList.add('popup_active');
 
 			if (callback) {
@@ -254,7 +256,9 @@
 			setTimeout(function () {
 
 				obj.tags.popup.classList.remove('popup_active');
-				obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
+				if(obj.defaults.addClassNamePopup) {
+					obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
+				}
 				obj.clear();
 
 
