@@ -262,8 +262,6 @@ dfn[title] {
 .response {
   width: 300px;
   padding: 20px;
-  background: #fff;
-  box-shadow: 1px 1px 5px 2px #555;
 }
 .response__text {
   font-family: Arial;
@@ -333,6 +331,22 @@ dfn[title] {
   display: inline-block;
   text-align: left;
   position: relative;
+  background: #fff;
+  box-shadow: 1px 1px 5px 2px #555;
+}
+.popup_dopclass .popup__block {
+  background: #ccc;
+  box-shadow: none;
+}
+.popup_dopclass .popup__block:before {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ccc;
+  transform: rotate(45deg);
+  left: -10px;
+  top: 21px;
+  content: '';
 }
 .popup__close {
   display: none;

@@ -51,6 +51,24 @@
 		display: inline-block;
 		text-align: left;
 		position: relative;
+		background: #fff;
+		box-shadow: 1px 1px 5px 2px #555;
+	}
+
+	&_dopclass &__block {
+		background: #ccc;
+		box-shadow: none;
+
+		&:before {
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			background: #ccc;
+			transform: rotate(45deg);
+			left: -10px;
+			top: 21px;
+			content: '';
+		}
 	}
 
 	&__close {

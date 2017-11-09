@@ -51,14 +51,18 @@ $(document).ready(function () {
 
 		e.preventDefault();
 
+		var x = this.offsetWidth + 30;
+		var y = -10;
+
 		$.post(this.href, function (response) {
 
 			globalPopup
 				.options({
+					addClassNamePopup: 'popup_dopclass',
 					background: 'none',
 					closeButtons: '.js-response__close',
-					offsetY: 45,
-					offsetX: 0,
+					offsetY: y,
+					offsetX: x,
 					coordElement: '[data-ajax3]'
 				})
 				.html(response)
