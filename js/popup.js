@@ -28,6 +28,7 @@
 		this.scrollWidth = this.scrollWidthElement();
 
 		this.defaults = {
+			bodyHidden: true,
 			addClassNamePopup: '',
 			closeOverlay: true,
 			closeShow: true,
@@ -45,6 +46,7 @@
 		options: function (opts) {
 
 			this.defaults = this.extend({
+				bodyHidden: true,
 				addClassNamePopup: '',
 				closeOverlay: true,
 				closeShow: true,
@@ -110,8 +112,8 @@
 
 				this.coords = button.getBoundingClientRect();
 
-				this.tags.popup__block.style.left = this.coords.left + this.defaults.offsetX + 'px';
-				this.tags.popup__block.style.top = this.coords.top + this.defaults.offsetY + 'px';
+				this.tags.popup__block.style.left = (this.defaults.bodyHidden ? 0 : window.pageXOffset) + this.coords.left + this.defaults.offsetX + 'px';
+				this.tags.popup__block.style.top = (this.defaults.bodyHidden ? 0 : window.pageYOffset) + this.coords.top + this.defaults.offsetY + 'px';
 				this.tags.popup__block.style.position = 'absolute';
 
 			}
@@ -125,6 +127,7 @@
 			var obj = this;
 
 			this.defaults = {
+				bodyHidden: true,
 				addClassNamePopup: '',
 				closeOverlay: true,
 				closeShow: true,
@@ -149,11 +152,16 @@
 
 			var trigger = window.innerHeight < document.body.scrollHeight;
 
-			document.body.classList.add('popup__body_hidden');
+			if(this.defaults.bodyHidden) {
 
-			if (trigger) {
-				document.body.style.paddingRight = this.scrollWidth + 'px';
+				document.body.classList.add('popup__body_hidden');
+
+				if (trigger) {
+					document.body.style.paddingRight = this.scrollWidth + 'px';
+				}
+
 			}
+
 			return this;
 
 		},

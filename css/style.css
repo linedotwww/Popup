@@ -304,6 +304,10 @@ dfn[title] {
   -o-transition: opacity 500ms;
   transition: opacity 500ms;
 }
+.popup_dopclass {
+  position: absolute;
+  overflow: visible;
+}
 .popup_active {
   opacity: 1;
   pointer-events: auto;

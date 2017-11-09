@@ -58,6 +58,7 @@ $(document).ready(function () {
 
 			globalPopup
 				.options({
+					bodyHidden: false,
 					addClassNamePopup: 'popup_dopclass',
 					background: 'none',
 					closeButtons: '.js-response__close',
