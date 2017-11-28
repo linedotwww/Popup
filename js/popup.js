@@ -28,6 +28,7 @@
 		this.scrollWidth = this.scrollWidthElement();
 
 		this.defaults = {
+			clearClose: true,
 			bodyHidden: true,
 			addClassNamePopup: '',
 			closeOverlay: true,
@@ -46,6 +47,7 @@
 		options: function (opts) {
 
 			this.defaults = this.extend({
+				clearClose: true,
 				bodyHidden: true,
 				addClassNamePopup: '',
 				closeOverlay: true,
@@ -127,6 +129,7 @@
 			var obj = this;
 
 			this.defaults = {
+				clearClose: true,
 				bodyHidden: true,
 				addClassNamePopup: '',
 				closeOverlay: true,
@@ -176,29 +179,10 @@
 
 		html: function (response, callback) {
 
-			if (this.defaults.closeShow) {
-				this.tags.popup__close.style.display = '';
-			}
-			else {
-				this.tags.popup__close.style.display = 'none';
-			}
-
-			this.setBodyStyle();
-
-			if (this.defaults.coordElement) {
-
-				this.coordSet();
-
-			}
-
-			this.tags.popup__change.innerHTML = response;
+			this.setHtml(this.tags.popup__change, response);
 
 			if (callback) {
 				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
-			}
-
-			if (this.defaults.closeButtons) {
-				this.addCloseButtons();
 			}
 
 			return this;
@@ -206,21 +190,6 @@
 		},
 
 		append: function (response, callback) {
-
-			if (this.defaults.closeShow) {
-				this.tags.popup__close.style.display = '';
-			}
-			else {
-				this.tags.popup__close.style.display = 'none';
-			}
-
-			this.setBodyStyle();
-
-			if (this.defaults.coordElement) {
-
-				this.coordSet();
-
-			}
 
 			this.tags.popup__change.innerHTML += response;
 
@@ -235,14 +204,35 @@
 			return this;
 		},
 
-		clear: function () {
+		clear: function (clear) {
 
-			this.tags.popup__change.innerHTML = '';
+			if(this.defaults.clearClose && clear) {
+				this.tags.popup__change.innerHTML = '';
+			}
 			return this;
 
 		},
 
 		show: function (callback) {
+
+			if (this.defaults.closeShow) {
+				this.tags.popup__close.style.display = '';
+			}
+			else {
+				this.tags.popup__close.style.display = 'none';
+			}
+
+			this.setBodyStyle();
+
+			if (this.defaults.coordElement) {
+
+				this.coordSet();
+
+			}
+
+			if (this.defaults.closeButtons) {
+				this.addCloseButtons();
+			}
 
 			if(this.defaults.addClassNamePopup) {
 				this.tags.popup.classList.add(this.defaults.addClassNamePopup);
@@ -281,6 +271,37 @@
 			}, 50);
 
 			return this;
+
+		},
+
+		setHtml: function(obj, html) {
+
+			var dv = document.createElement('div');
+			dv.innerHTML = html;
+
+			for (var i = 0; i < dv.children.length; i++) {
+				var c = dv.children[i];
+
+				var n = document.createElement(c.nodeName);
+
+				for (var j = 0; j < c.attributes.length; j++)
+					n.setAttribute(c.attributes[j].nodeName, c.attributes[j].nodeValue);
+
+				if (c.children.length == 0) {
+					switch (c.nodeName) {
+						case "SCRIPT":
+							if (c.text) n.text = c.text;
+							break;
+						default:
+							if (c.innerHTML) n.innerHTML = c.innerHTML;
+							break;
+					}
+				}
+				else {
+					this.setHTML(n, c.innerHTML);
+				}
+				obj.appendChild(n);
+			}
 
 		},
 
