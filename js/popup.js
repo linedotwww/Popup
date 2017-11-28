@@ -206,7 +206,7 @@
 
 		clear: function (clear) {
 
-			if(this.defaults.clearClose && clear) {
+			if(this.defaults.clearClose || clear) {
 				this.tags.popup__change.innerHTML = '';
 			}
 			return this;
@@ -298,7 +298,7 @@
 					}
 				}
 				else {
-					this.setHTML(n, c.innerHTML);
+					this.setHtml(n, c.innerHTML);
 				}
 				obj.appendChild(n);
 			}
