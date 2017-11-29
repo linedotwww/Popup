@@ -179,6 +179,8 @@
 
 		html: function (response, callback) {
 
+			this.tags.popup__change.innerHTML = '';
+
 			this.setHtml(this.tags.popup__change, response);
 
 			if (callback) {
@@ -191,7 +193,7 @@
 
 		append: function (response, callback) {
 
-			this.tags.popup__change.innerHTML += response;
+			this.setHtml(this.tags.popup__change, response);
 
 			if (callback) {
 				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
