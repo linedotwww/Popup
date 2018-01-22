@@ -181,7 +181,7 @@
 
 			this.tags.popup__change.innerHTML = '';
 
-			this.setHtml(this.tags.popup__change, response);
+			$(this.tags.popup__change).html(response);
 
 			if (callback) {
 				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
@@ -193,7 +193,7 @@
 
 		append: function (response, callback) {
 
-			this.setHtml(this.tags.popup__change, response);
+			$(this.tags.popup__change).html(response);
 
 			if (callback) {
 				callback.call(this.tags.popup, this.defaults, this.eventsTrigger);
@@ -273,37 +273,6 @@
 			}, 50);
 
 			return this;
-
-		},
-
-		setHtml: function(obj, html) {
-
-			var dv = document.createElement('div');
-			dv.innerHTML = html;
-
-			for (var i = 0; i < dv.children.length; i++) {
-				var c = dv.children[i];
-
-				var n = document.createElement(c.nodeName);
-
-				for (var j = 0; j < c.attributes.length; j++)
-					n.setAttribute(c.attributes[j].nodeName, c.attributes[j].nodeValue);
-
-				if (c.children.length == 0) {
-					switch (c.nodeName) {
-						case "SCRIPT":
-							if (c.text) n.text = c.text;
-							break;
-						default:
-							if (c.innerHTML) n.innerHTML = c.innerHTML;
-							break;
-					}
-				}
-				else {
-					this.setHtml(n, c.innerHTML);
-				}
-				obj.appendChild(n);
-			}
 
 		},
 
