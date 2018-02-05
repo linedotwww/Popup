@@ -2,6 +2,7 @@
 
 	var mobileDetect = /Android|iPhone|iPad|iPod|BlackBerry|WPDesktop|IEMobile|Opera Mini/i.test(navigator.userAgent);
 	var bugIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+	var ie10 = (navigator.appVersion.indexOf("MSIE 10") !== -1) ? true : false;
 
 	var createElement = function (cls, parent) {
 		var obj = document.createElement('div');
@@ -15,7 +16,7 @@
 	function Popup() {
 
 		this.tags = {};
-		this.tags.popup = createElement('popup' + (bugIOS ? ' popup_iphone' : ''), document.body);
+		this.tags.popup = createElement('popup' + (bugIOS ? ' popup_iphone' : '') + (ie10 ? ' popup_ie10' : ''), document.body);
 		this.tags.popup__overlay = createElement('popup__overlay', this.tags.popup);
 		this.tags.popup__table = createElement('popup__table', this.tags.popup);
 		this.tags.popup__cell = createElement('popup__cell', this.tags.popup__table);
@@ -156,7 +157,7 @@
 
 			var trigger = window.innerHeight < document.body.scrollHeight;
 
-			if(this.defaults.bodyHidden) {
+			if (this.defaults.bodyHidden) {
 
 				document.body.classList.add('popup__body_hidden');
 
@@ -209,7 +210,7 @@
 
 		clear: function (clear) {
 
-			if(this.defaults.clearClose || clear) {
+			if (this.defaults.clearClose || clear) {
 				this.tags.popup__change.innerHTML = '';
 			}
 			return this;
@@ -237,7 +238,7 @@
 				this.addCloseButtons();
 			}
 
-			if(this.defaults.addClassNamePopup) {
+			if (this.defaults.addClassNamePopup) {
 				this.tags.popup.classList.add(this.defaults.addClassNamePopup);
 			}
 			this.tags.popup.classList.add('popup_active');
@@ -257,7 +258,7 @@
 			setTimeout(function () {
 
 				obj.tags.popup.classList.remove('popup_active');
-				if(obj.defaults.addClassNamePopup) {
+				if (obj.defaults.addClassNamePopup) {
 					obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
 				}
 				obj.clear();
