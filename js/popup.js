@@ -16,7 +16,7 @@
 	function Popup() {
 
 		this.tags = {};
-		this.tags.popup = createElement('popup' + (bugIOS ? ' popup_iphone' : '') + (ie10 ? ' popup_ie10' : ''), document.body);
+		this.tags.popup = createElement('popup' + (ie10 ? ' popup_ie10' : ''), document.body);
 		this.tags.popup__overlay = createElement('popup__overlay', this.tags.popup);
 		this.tags.popup__table = createElement('popup__table', this.tags.popup);
 		this.tags.popup__cell = createElement('popup__cell', this.tags.popup__table);
@@ -219,6 +219,8 @@
 
 		show: function (callback) {
 
+			document.documentElement.add((bugIOS ? 'popup_iphone' : ''));
+
 			if (this.defaults.closeShow) {
 				this.tags.popup__close.style.display = '';
 			}
@@ -258,6 +260,8 @@
 			setTimeout(function () {
 
 				obj.tags.popup.classList.remove('popup_active');
+				document.documentElement.classList.remove((bugIOS ? 'popup_iphone' : ''));
+
 				if (obj.defaults.addClassNamePopup) {
 					obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
 				}
