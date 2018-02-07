@@ -219,7 +219,9 @@
 
 		show: function (callback) {
 
-			document.documentElement.classList.add((bugIOS ? 'popup_iphone' : ''));
+			if(bugIOS) {
+				document.documentElement.classList.add('popup_iphone');
+			}
 
 			if (this.defaults.closeShow) {
 				this.tags.popup__close.style.display = '';
@@ -260,7 +262,10 @@
 			setTimeout(function () {
 
 				obj.tags.popup.classList.remove('popup_active');
-				document.documentElement.classList.remove((bugIOS ? 'popup_iphone' : ''));
+
+				if(bugIOS) {
+					document.documentElement.classList.remove('popup_iphone');
+				}
 
 				if (obj.defaults.addClassNamePopup) {
 					obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
