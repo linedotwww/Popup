@@ -219,7 +219,7 @@
 
 		show: function (callback) {
 
-			document.documentElement.add((bugIOS ? 'popup_iphone' : ''));
+			document.documentElement.classList.add((bugIOS ? 'popup_iphone' : ''));
 
 			if (this.defaults.closeShow) {
 				this.tags.popup__close.style.display = '';
