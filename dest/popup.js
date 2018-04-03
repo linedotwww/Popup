@@ -46,6 +46,8 @@
 
 	Popup.prototype = {
 
+		isOpen: false,
+
 		options: function (opts) {
 
 			this.defaults = this.extend({
@@ -219,7 +221,11 @@
 
 		show: function (callback) {
 
-			if(bugIOS) {
+			this.isOpen = true;
+			this.offsetTop = window.pageYOffset;
+			document.body.style.top = this.offsetTop * (-1) + 'px';
+
+			if (bugIOS) {
 				document.documentElement.classList.add('popup_iphone');
 			}
 
@@ -263,7 +269,7 @@
 
 				obj.tags.popup.classList.remove('popup_active');
 
-				if(bugIOS) {
+				if (bugIOS) {
 					document.documentElement.classList.remove('popup_iphone');
 				}
 
@@ -280,6 +286,10 @@
 				}
 
 				obj.clearBodyStyle();
+
+				obj.isOpen = false;
+				document.body.style.top = '';
+				window.scrollTo(0, obj.offsetTop);
 
 			}, 50);
 
