@@ -13,7 +13,7 @@
 <pre>
     globalPopup.options({
 	clearClose: true,			// Очищаем контейнер после закрытия попап
-        bodyHidden: true,			// Убирает скролл у тега &lt;body&rt;
+        bodyHidden: true,			// Убирает скролл у тега &lt;body&qt;
         addClassNamePopup: 'dopclass',		// Дополнительный класс добавляем контейнеру попапа, который будет удаляться при закрытии попап
         closeShow: true,			// Скрываем, либо показываем кнопку закрытия
 	closeOverlay: true,			// Закрытие попап при клике по заднему фону
