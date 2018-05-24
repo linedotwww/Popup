@@ -183,8 +183,6 @@
 
 		html: function (response, callback) {
 
-			this.tags.popup__change.innerHTML = '';
-
 			$(this.tags.popup__change).html(response);
 
 			if (callback) {
@@ -224,6 +222,8 @@
 			this.isOpen = true;
 			this.offsetTop = window.pageYOffset;
 			document.body.style.top = this.offsetTop * (-1) + 'px';
+
+			this.tags.popup.className = 'popup';
 
 			if (bugIOS) {
 				document.documentElement.classList.add('popup_iphone');
