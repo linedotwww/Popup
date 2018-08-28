@@ -261,7 +261,7 @@
 
 		},
 
-		close: function (callback) {
+		close: function (clear, callback) {
 
 			var obj = this;
 
@@ -276,8 +276,10 @@
 				if (obj.defaults.addClassNamePopup) {
 					obj.tags.popup.classList.remove(obj.defaults.addClassNamePopup);
 				}
-				obj.clear();
 
+				if(clear == 'clear') {
+					obj.tags.popup__change.innerHTML = '';
+				}
 
 				obj.coordReset();
 

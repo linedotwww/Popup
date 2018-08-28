@@ -56,7 +56,7 @@
 </p>
 <pre>
     globalPopup.close();
-    globalPopup.close(function() {			// Имеет callback
+    globalPopup.close('clear', function() {			// 'clear' - очищает контейнер и имеет callback
 
     });
 </pre>
