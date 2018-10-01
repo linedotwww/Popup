@@ -27,6 +27,11 @@
 		width: 100%;
 	}
 
+	&_ie10,
+	&_ie9 {
+		display: none;
+	}
+
 	&_dopclass {
 		position: absolute;
 		overflow: visible;
@@ -35,6 +40,11 @@
 	&_active {
 		opacity: 1;
 		pointer-events: auto;
+	}
+
+	&_ie10&_active,
+	&_ie9&_active {
+		display: block;
 	}
 
 	&__overlay {
