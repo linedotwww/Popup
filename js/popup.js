@@ -3,6 +3,7 @@
 	var mobileDetect = /Android|iPhone|iPad|iPod|BlackBerry|WPDesktop|IEMobile|Opera Mini/i.test(navigator.userAgent);
 	var bugIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 	var ie10 = (navigator.appVersion.indexOf("MSIE 10") !== -1) ? true : false;
+	var ie9 = (navigator.appVersion.indexOf("MSIE 9") !== -1) ? true : false;
 
 	var createElement = function (cls, parent) {
 		var obj = document.createElement('div');
@@ -16,7 +17,7 @@
 	function Popup() {
 
 		this.tags = {};
-		this.tags.popup = createElement('popup' + (ie10 ? ' popup_ie10' : ''), document.body);
+		this.tags.popup = createElement('popup' + (ie10 ? ' popup_ie10' : '') + (ie9 ? ' popup_ie9' : ''), document.body);
 		this.tags.popup__overlay = createElement('popup__overlay', this.tags.popup);
 		this.tags.popup__table = createElement('popup__table', this.tags.popup);
 		this.tags.popup__cell = createElement('popup__cell', this.tags.popup__table);
