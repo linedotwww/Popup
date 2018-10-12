@@ -31,7 +31,7 @@
 		this.scrollWidth = this.scrollWidthElement();
 
 		this.defaults = {
-			clearClose: true,
+			clearClose: false,
 			bodyHidden: true,
 			addClassNamePopup: '',
 			closeOverlay: true,
@@ -312,7 +312,7 @@
 
 			}, false);
 
-			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function (e) {
+			this.tags.popup__overlay.addEventListener('click', function (e) {
 
 				e.stopPropagation();
 
@@ -323,6 +323,12 @@
 				return false;
 
 			}, false);
+
+			this.tags.popup__block.addEventListener(this.eventsTrigger, function(e) {
+
+				e.stopPropagation();
+
+			});
 
 			document.addEventListener('keydown', function (e) {
 
