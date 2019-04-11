@@ -66,3 +66,10 @@
 <pre>
     globalPopup.clear();
 </pre>
+<p>
+    <b>loader</b> - Индикатор подгрузки
+</p>
+<pre>
+    globalPopup.loader(true);
+	globalPopup.loader(false);
+</pre>
