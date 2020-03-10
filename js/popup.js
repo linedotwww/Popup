@@ -1,7 +1,6 @@
 ;
 (function (global) {
 
-	var mobileDetect = /Android|iPhone|iPad|iPod|BlackBerry|WPDesktop|IEMobile|Opera Mini/i.test(navigator.userAgent);
 	var bugIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 	var ie10 = (navigator.appVersion.indexOf("MSIE 10") !== -1) ? true : false;
 	var ie9 = (navigator.appVersion.indexOf("MSIE 9") !== -1) ? true : false;
@@ -27,7 +26,7 @@
 		this.tags.popup__close = createElement('popup__close', this.tags.popup__block);
 		this.tags.popup__change = createElement('popup__change', this.tags.popup__block);
 
-		this.eventsTrigger = mobileDetect ? 'touchend' : 'mouseup';
+		this.eventsTrigger = 'click';
 
 		this.events();
 		this.scrollWidth = this.scrollWidthElement();
@@ -97,8 +96,6 @@
 				Array.prototype.forEach.call(selectors, function (element, i) {
 
 					element.addEventListener(obj.eventsTrigger, function (e) {
-
-						e.stopPropagation();
 
 						obj.close();
 
@@ -306,16 +303,13 @@
 			var obj = this;
 
 			this.tags.popup__close.addEventListener(this.eventsTrigger, function (e) {
-
-				e.stopPropagation();
+				
 				obj.close();
 				return false;
 
 			}, false);
 
-			this.tags.popup__overlay.addEventListener('click', function (e) {
-
-				e.stopPropagation();
+			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function (e) {
 
 				if (obj.defaults.closeOverlay) {
 					obj.close();
@@ -324,12 +318,6 @@
 				return false;
 
 			}, false);
-
-			this.tags.popup__block.addEventListener(this.eventsTrigger, function (e) {
-
-				e.stopPropagation();
-
-			});
 
 			document.addEventListener('keydown', function (e) {
 
