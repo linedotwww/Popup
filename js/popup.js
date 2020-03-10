@@ -97,8 +97,6 @@
 
 					element.addEventListener(obj.eventsTrigger, function (e) {
 
-						e.stopPropagation();
-
 						obj.close();
 
 						return false;
@@ -305,16 +303,13 @@
 			var obj = this;
 
 			this.tags.popup__close.addEventListener(this.eventsTrigger, function (e) {
-
-				e.stopPropagation();
+				
 				obj.close();
 				return false;
 
 			}, false);
 
 			this.tags.popup__overlay.addEventListener(this.eventsTrigger, function (e) {
-
-				e.stopPropagation();
 
 				if (obj.defaults.closeOverlay) {
 					obj.close();
@@ -323,12 +318,6 @@
 				return false;
 
 			}, false);
-
-			this.tags.popup__block.addEventListener(this.eventsTrigger, function (e) {
-
-				e.stopPropagation();
-
-			});
 
 			document.addEventListener('keydown', function (e) {
 
